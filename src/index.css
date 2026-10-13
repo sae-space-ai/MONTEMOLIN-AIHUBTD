@@ -56,3 +56,84 @@ body {
 .timeline-bar {
   transition: width 1s ease-in-out;
 }
+
+/* ============================================================
+   PRINT STYLES
+   Preserva el diseño en impresión, oculta elementos interactivos
+   y garantiza la legibilidad de tablas y cronogramas.
+   ============================================================ */
+@media print {
+  /* Ocultar navegación y controles interactivos */
+  nav,
+  button,
+  [role="button"] {
+    display: none !important;
+  }
+
+  /* Reset de fondo y colores para impresión */
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Evitar saltos de página en medio de secciones */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Permitir saltos entre secciones */
+  section + section {
+    page-break-before: auto;
+  }
+
+  /* Tablas: evitar cortes en filas */
+  table {
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  thead {
+    display: table-header-group;
+  }
+
+  /* Asegurar que las barras del Gantt sean visibles */
+  .bg-blue-500,
+  .bg-indigo-500,
+  .bg-purple-500,
+  .bg-green-500,
+  .bg-orange-500,
+  .bg-teal-500,
+  .bg-pink-500 {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Enlaces: mostrar URL */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  /* Sombras y efectos innecesarios en impresión */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Asegurar que los fondos de estado se impriman */
+  .bg-amber-50,
+  .bg-emerald-50,
+  .bg-rose-50,
+  .bg-slate-100,
+  .bg-blue-50,
+  .bg-indigo-100 {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
